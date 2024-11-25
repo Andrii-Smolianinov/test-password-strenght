@@ -1,72 +1,67 @@
 import React, { useState } from "react";
 
-import PasswordStrengthBar from "./PasswordStrengthBar";
-
-import { ImEyeBlocked } from "react-icons/im";
-import { ImEye } from "react-icons/im";
+import { PasswordStrengthBar, InputBar, Tittle } from "./index";
 
 const PasswordStrengthChecker = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [strength, setStrength] = useState({ level: "empty", message: "Please enter a password" });
-  
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const [strength, setStrength] = useState({
+    level: "empty",
+    message: "Please enter a password",
+    shadow: "233, 238, 231, 0.75",
+  });
 
   const getStrength = (password) => {
     const conditions = [
-      /[a-zA-Z]/.test(password),
+      /[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ]/.test(password),
       /[0-9]/.test(password),
       /[!@#$%^&*(),.?":{}|<>]/.test(password),
     ];
 
-    console.log('conditions', conditions);
-
     const count = conditions.filter(Boolean).length;
 
     if (!password)
-      return { level: "empty", message: "Please enter a password" };
+      return {
+        level: "empty",
+        message: "Please enter a password",
+        shadow: "233, 238, 231, 0.75",
+      };
     if (password.length < 8)
-      return { level: "short", message: "Password is too short" };
+      return {
+        level: "short",
+        message: "Password is too short",
+        shadow: "241, 9, 9, 0.75",
+      };
     if (count === 1)
-      return { level: "simple", message: "Password is too simple" };
+      return {
+        level: "simple",
+        message: "Password is too simple",
+        shadow: "241, 9, 9, 0.75",
+      };
     if (count === 2)
-      return { level: "medium", message: "Password is medium strength" };
-    if (count === 3) return { level: "strong", message: "Password is strong" };
-  };
-
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-    setStrength(getStrength(inputValue));
+      return {
+        level: "medium",
+        message: "Password is medium strength",
+        shadow: "214, 241, 9, 0.75",
+      };
+    if (count === 3)
+      return {
+        level: "strong",
+        message: "Password is strong",
+        shadow: "72, 231, 13, 0.75",
+      };
   };
 
   return (
-    <div className="flex flex-col border-2 border-gray-700 py-4 px-8 bg-cyan-700 shadow-lg shadow-yellow-400/50">
-      <h1 className="text-2xl font-bold text-cyan-400 mb-3 text-center">
-        Test Password Strenght
-      </h1>
-
-      <div className="flex items-center mb-5 relative">
-        <input
-          value={password}
-          onChange={handleChange}
-          placeholder="Enter password"
-          type={showPassword ? "text" : "password"}
-          className="border w-80 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-
-        <div
-          className="absolute cursor-pointer right-3"
-          onClick={handleShowPassword}
-        >
-          {showPassword ? <ImEye /> : <ImEyeBlocked />}
-        </div>
-      </div>
-
-      <PasswordStrengthBar level={strength.level} />
-      <p className="text-sm text-teal-100">{strength.message}</p>
+    <div
+      className={`flex flex-col border-2 rounded-lg border-gray-900 bg-cyan-900 transition-shadow
+      py-3 md:py-4 lg:py-5
+      px-4 md:px-6 lg:px-8`}
+      style={{
+        boxShadow: `-1px 27px 33px -15px rgba(${strength.shadow})`,
+      }}
+    >
+      <Tittle text="Test Password Strength" />
+      <InputBar getStrength={getStrength} setStrength={setStrength} />
+      <PasswordStrengthBar strength={strength} />
     </div>
   );
 };

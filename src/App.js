@@ -1,5 +1,4 @@
-import Container from "./components/Container";
-import PasswordStrengthChecker from "./components/PasswordStrengthChecker";
+import { Container, PasswordStrengthChecker } from "./components/index";
 
 function App() {
   return (
