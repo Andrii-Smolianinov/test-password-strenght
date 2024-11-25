@@ -1,8 +1,11 @@
+import Container from "./components/Container";
+import PasswordStrengthChecker from "./components/PasswordStrengthChecker";
+
 function App() {
   return (
-    <h1 className="text-3xl font-bold text-blue-600">
-      Test Password Strenght
-    </h1>
+    <Container>
+      <PasswordStrengthChecker />
+    </Container>
   );
 }
 
