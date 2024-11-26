@@ -1,6 +1,11 @@
 import React from "react";
 
-const Icon = ({ id, className }) => {
+type IconProps = {
+  id: string;
+  className: string;
+};
+
+const Icon: React.FC<IconProps> = ({ id, className }) => {
   return (
     <svg className={className}>
       <use xlinkHref={`sprite.svg#${id}`} />

@@ -1,3 +1,4 @@
+import React from "react";
 import { Container, PasswordStrengthChecker } from "./components/index";
 
 function App() {

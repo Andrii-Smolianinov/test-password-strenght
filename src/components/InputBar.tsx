@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 
+import { StrengthTypes } from "../controllers/password/passwordTypes";
+
 import { Icon } from "./index";
 
-const InputBar = ({ getStrength, setStrength }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+interface InputBarProps {
+  getStrength: (password: string) => StrengthTypes;
+  setStrength: React.Dispatch<React.SetStateAction<StrengthTypes>>;
+}
 
-  const handleChange = (e) => {
+const InputBar: React.FC<InputBarProps> = ({ getStrength, setStrength }) => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setPassword(inputValue);
     setStrength(getStrength(inputValue));
   };
 
   const handleShowPassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -37,9 +44,15 @@ const InputBar = ({ getStrength, setStrength }) => {
         onClick={handleShowPassword}
       >
         {showPassword ? (
-          <Icon id="passwordView" className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8" />
+          <Icon
+            id="passwordView"
+            className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8"
+          />
         ) : (
-          <Icon id="passwordHidden" className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8" />
+          <Icon
+            id="passwordHidden"
+            className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8"
+          />
         )}
       </div>
     </div>

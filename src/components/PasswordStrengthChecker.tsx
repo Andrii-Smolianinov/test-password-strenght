@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+
+import { StrengthTypes } from "../controllers/password/passwordTypes";
 import usePasswordStrength from "../hooks/usePasswordStrength";
 
 import { PasswordStrengthBar, InputBar, Tittle } from "./index";
 
-const PasswordStrengthChecker = () => {
+const PasswordStrengthChecker:React.FC = () => {
   const { getStrength } = usePasswordStrength();
-  const [strength, setStrength] = useState({
+  const [strength, setStrength] = useState<StrengthTypes>({
     level: "empty",
     message: "Please enter a password",
     shadow: "233, 238, 231, 0.75",

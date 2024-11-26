@@ -1,6 +1,10 @@
-import React from "react";
+import React, { ReactElement } from 'react';
 
-const Container = ({ children }) => {
+interface LayoutProps {
+  children: ReactElement;
+}
+
+const Container:React.FC<LayoutProps> = ({ children }) => {
   return (
     <section
       className="flex items-center justify-center h-screen w-screen 
