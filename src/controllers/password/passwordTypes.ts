@@ -1,5 +1,7 @@
+import { ColorLevel } from "../colors/colorTypes";
+
 export interface StrengthTypes {
-  level: "empty" | "short" | "simple" | "medium" | "strong";
+  level: ColorLevel;
   message: string;
   shadow: string;
 }
